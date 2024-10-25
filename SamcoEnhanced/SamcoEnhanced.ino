@@ -2293,7 +2293,14 @@ void AnalogStickPoll()
     // Analog stick deadzone should help mitigate overwriting USB commands for the other input channels.
     if((analogValueX < 1900 || analogValueX > 2200) ||
        (analogValueY < 1900 || analogValueY > 2200)) {
-          Gamepad16.moveStick(analogValueX, analogValueY);
+	    if(buttons.analogOutput == true)
+	    {
+          	Gamepad16.moveStick(analogValueX, analogValueY);
+	    }
+	    else
+	    {
+		    //Meter el código para convertir la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
+	    }
     } else {
         // Duplicate coords won't be reported, so no worries.
         Gamepad16.moveStick(2048, 2048);
