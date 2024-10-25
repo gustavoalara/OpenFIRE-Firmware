@@ -80,7 +80,7 @@
   // Enables input processing on the second core, if available. Currently exclusive to Raspberry Pi Pico, or boards based on the RP2040.
   // Isn't necessarily faster, but might make responding to force feedback more consistent.
   // If unsure, leave this uncommented - it only affects RP2040 anyways.
-//#define DUAL_CORE
+#define DUAL_CORE
 
   // Here we define the Manufacturer Name/Device Name/PID:VID of the gun as will be displayed by the operating system.
   // For multiplayer, different guns need different IDs!
@@ -92,29 +92,29 @@
 
   // Set what player this board is mapped to by default (1-4). This will change keyboard mappings appropriate for the respective player.
   // If unsure, just leave this at 1 - the mapping can be changed at runtime by sending an 'XR#' command over Serial, where # = player number
-//#define PLAYER_NUMBER 1
+#define PLAYER_NUMBER 1
 
   // Leave this uncommented to enable MAMEHOOKER support, or comment out (//) to disable references to serial reading and only use it for debugging.
   // WARNING: Has a chance of making the board lock up if TinyUSB hasn't been patched to fix serial-related lockups.
   // If you're building this for RP2040, please make sure that you have NOT installed the TinyUSB library.
   // If unsure, leave uncommented - serial activity is used for configuration, and undefining this will cause errors.
-//#define MAMEHOOKER
+#define MAMEHOOKER
 
   // Leave this uncommented if your build uses hardware switches, or comment out to disable all references to hw switch functionality.
-//#define USES_SWITCHES
+#define USES_SWITCHES
 
   // Leave this uncommented if your build uses a rumble motor; comment out to disable any references to rumble functionality.
-//#define USES_RUMBLE
+#define USES_RUMBLE
 
   // Leave this uncommented if your build uses a solenoid, or comment out to disable any references to solenoid functionality.
-//#define USES_SOLENOID
+#define USES_SOLENOID
 #ifdef USES_SOLENOID
     // Leave this uncommented for TMP36 temperature sensor support for a solenoid, or comment out to disable references to temperature reading or throttling.
     //#define USES_TEMP
 #endif // USES_SOLENOID
 
   // Leave this uncommented if your build uses an analog stick.
-//#define USES_ANALOG
+#define USES_ANALOG
 
   // Leave this uncommented if your build uses a four pin RGB LED.
 //#define FOURPIN_LED
@@ -123,14 +123,14 @@
 #endif // FOURPIN_LED
 
   // Leave this uncommented if your build uses an external NeoPixel.
-//#define CUSTOM_NEOPIXEL
+#define CUSTOM_NEOPIXEL
 #ifdef CUSTOM_NEOPIXEL
     #define LED_ENABLE
     #include <Adafruit_NeoPixel.h>
 #endif // CUSTOM_NEOPIXEL
 
   // Leave this uncommented to enable optional support for SSD1306 monochrome OLED displays.
-//#define USES_DISPLAY
+#define USES_DISPLAY
 #ifdef USES_DISPLAY
   #include "SamcoDisplay.h"
 #endif // USES_DISPLAY
@@ -140,9 +140,21 @@
 #if PLAYER_NUMBER == 1
     char playerStartBtn = '1';
     char playerSelectBtn = '5';
+    char playerUpBtn = 0xDA;
+    char playerDownBtn = 0xD9;
+    char playerLeftBtn = 0xD8;
+    char playerRightBtn = 0xD7;
+    char playerCBtn = 0x81; // Left Shift
+    char playerPumpBtn = 0x85; // Right Shift
 #elif PLAYER_NUMBER == 2
     char playerStartBtn = '2';
     char playerSelectBtn = '6';
+    char playerUpBtn = 'w';
+    char playerDownBtn = 's';
+    char playerLeftBtn = 'a';
+    char playerRightBtn = 'd';
+    char playerCBtn = 0x80; // Left Control
+    char playerPumpBtn = 0x84; // Right Control
 #elif PLAYER_NUMBER == 3
     char playerStartBtn = '3';
     char playerSelectBtn = '7';
@@ -205,14 +217,14 @@ LightgunButtons::Desc_t LightgunButtons::ButtonDesc[] = {
     {SamcoPreferences::pins.bGunB,     LightgunButtons::ReportType_Mouse,    MOUSE_MIDDLE,    LightgunButtons::ReportType_Mouse,    MOUSE_MIDDLE,    LightgunButtons::ReportType_Gamepad,  PAD_Y,      15, BTN_AG_MASK2},
     {SamcoPreferences::pins.bStart,    LightgunButtons::ReportType_Keyboard, playerStartBtn,  LightgunButtons::ReportType_Keyboard, playerStartBtn,  LightgunButtons::ReportType_Gamepad,  PAD_START,  20, BTN_AG_MASK2},
     {SamcoPreferences::pins.bSelect,   LightgunButtons::ReportType_Keyboard, playerSelectBtn, LightgunButtons::ReportType_Keyboard, playerSelectBtn, LightgunButtons::ReportType_Gamepad,  PAD_SELECT, 20, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bGunUp,    LightgunButtons::ReportType_Gamepad,  PAD_UP,          LightgunButtons::ReportType_Gamepad,  PAD_UP,          LightgunButtons::ReportType_Gamepad,  PAD_UP,     20, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bGunDown,  LightgunButtons::ReportType_Gamepad,  PAD_DOWN,        LightgunButtons::ReportType_Gamepad,  PAD_DOWN,        LightgunButtons::ReportType_Gamepad,  PAD_DOWN,   20, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bGunLeft,  LightgunButtons::ReportType_Gamepad,  PAD_LEFT,        LightgunButtons::ReportType_Gamepad,  PAD_LEFT,        LightgunButtons::ReportType_Gamepad,  PAD_LEFT,   20, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bGunRight, LightgunButtons::ReportType_Gamepad,  PAD_RIGHT,       LightgunButtons::ReportType_Gamepad,  PAD_RIGHT,       LightgunButtons::ReportType_Gamepad,  PAD_RIGHT,  20, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bGunC,     LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON4,   LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON4,   LightgunButtons::ReportType_Gamepad,  PAD_A,      15, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bGunUp,    LightgunButtons::ReportType_Keyboard, playerUpBtn,     LightgunButtons::ReportType_Keyboard, playerUpBtn,     LightgunButtons::ReportType_Gamepad,  PAD_UP,     20, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bGunDown,  LightgunButtons::ReportType_Keyboard, playerDownBtn,   LightgunButtons::ReportType_Keyboard, playerDownBtn,   LightgunButtons::ReportType_Gamepad,  PAD_DOWN,   20, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bGunLeft,  LightgunButtons::ReportType_Keyboard, playerLeftBtn,   LightgunButtons::ReportType_Keyboard, playerLeftBtn,   LightgunButtons::ReportType_Gamepad,  PAD_LEFT,   20, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bGunRight, LightgunButtons::ReportType_Keyboard, playerRightBtn,  LightgunButtons::ReportType_Keyboard, playerRightBtn,  LightgunButtons::ReportType_Gamepad,  PAD_RIGHT,  20, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bGunC,     LightgunButtons::ReportType_Keyboard, playerCBtn,      LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON4,   LightgunButtons::ReportType_Gamepad,  PAD_A,      15, BTN_AG_MASK2},
     {SamcoPreferences::pins.bPedal,    LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON4,   LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON4,   LightgunButtons::ReportType_Gamepad,  PAD_X,      15, BTN_AG_MASK2},
     {SamcoPreferences::pins.bPedal2,   LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON5,   LightgunButtons::ReportType_Mouse,    MOUSE_BUTTON5,   LightgunButtons::ReportType_Gamepad,  PAD_B,      15, BTN_AG_MASK2},
-    {SamcoPreferences::pins.bPump,     LightgunButtons::ReportType_Mouse,    MOUSE_RIGHT,     LightgunButtons::ReportType_Mouse,    MOUSE_RIGHT,     LightgunButtons::ReportType_Gamepad,  PAD_LT,     15, BTN_AG_MASK2},
+    {SamcoPreferences::pins.bPump,     LightgunButtons::ReportType_Keyboard, playerPumpBtn,   LightgunButtons::ReportType_Mouse,    MOUSE_RIGHT,     LightgunButtons::ReportType_Gamepad,  PAD_LB,     15, BTN_AG_MASK2},
     {SamcoPreferences::pins.bHome,     LightgunButtons::ReportType_Internal, 0,               LightgunButtons::ReportType_Internal, 0,               LightgunButtons::ReportType_Internal, 0,          15, BTN_AG_MASK2}
 };
 
