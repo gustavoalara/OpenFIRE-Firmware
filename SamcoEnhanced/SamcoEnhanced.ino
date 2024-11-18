@@ -110,14 +110,14 @@
 #define USES_SOLENOID
 #ifdef USES_SOLENOID
     // Leave this uncommented for TMP36 temperature sensor support for a solenoid, or comment out to disable references to temperature reading or throttling.
-    //#define USES_TEMP
+    #define USES_TEMP
 #endif // USES_SOLENOID
 
   // Leave this uncommented if your build uses an analog stick.
 #define USES_ANALOG
 
   // Leave this uncommented if your build uses a four pin RGB LED.
-//#define FOURPIN_LED
+#define FOURPIN_LED
 #ifdef FOURPIN_LED
     #define LED_ENABLE
 #endif // FOURPIN_LED
