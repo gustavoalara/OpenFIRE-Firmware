@@ -2299,11 +2299,28 @@ void AnalogStickPoll()
 	    }
 	    else
 	    {
-		    //Meter el código para convertir la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
+		 //Convierte la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
+	    
+	    	 if (analogValueY > 2200 ) Keyboard.press(btn.playerUpBtn);
+	         if (analogValueY < 1900 ) Keyboard.press(btn.playerDownBtn);
+
+	    	 if (analogValueX > 2200 ) Keyboard.press(btn.playerRightBtn);
+	         if (analogValueX < 1900 ) Keyboard.press(btn.playerLeftBtn);
 	    }
     } else {
-        // Duplicate coords won't be reported, so no worries.
-        Gamepad16.moveStick(2048, 2048);
+	if(buttons.analogOutput == true)
+	    {
+        	// Duplicate coords won't be reported, so no worries.
+        	Gamepad16.moveStick(2048, 2048);
+	    }
+	    else
+	    {
+                // Libera las teclas pulsadas en caso de que no se estén presionando
+		Keyboard.release(btn.playerUpBtn);
+	        Keyboard.release(btn.playerDownBtn);
+	    	Keyboard.release(btn.playerRightBtn);
+	        Keyboard.release(btn.playerLeftBtn);
+	    }
     }
 }
 #endif // USES_ANALOG
