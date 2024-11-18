@@ -2301,11 +2301,11 @@ void AnalogStickPoll()
 	    {
 		 //Convierte la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
 	    
-	    	 if (analogValueY > 2200 ) Keyboard.press(btn.playerUpBtn);
-	         if (analogValueY < 1900 ) Keyboard.press(btn.playerDownBtn);
+	    	 if (analogValueY > 2200 ) Keyboard.press(playerUpBtn);
+	         if (analogValueY < 1900 ) Keyboard.press(playerDownBtn);
 
-	    	 if (analogValueX > 2200 ) Keyboard.press(btn.playerRightBtn);
-	         if (analogValueX < 1900 ) Keyboard.press(btn.playerLeftBtn);
+	    	 if (analogValueX > 2200 ) Keyboard.press(playerRightBtn);
+	         if (analogValueX < 1900 ) Keyboard.press(playerLeftBtn);
 	    }
     } else {
 	if(buttons.analogOutput == true)
@@ -2316,10 +2316,10 @@ void AnalogStickPoll()
 	    else
 	    {
                 // Libera las teclas pulsadas en caso de que no se estén presionando
-		Keyboard.release(btn.playerUpBtn);
-	        Keyboard.release(btn.playerDownBtn);
-	    	Keyboard.release(btn.playerRightBtn);
-	        Keyboard.release(btn.playerLeftBtn);
+		Keyboard.release(playerUpBtn);
+	        Keyboard.release(playerDownBtn);
+	    	Keyboard.release(playerRightBtn);
+	        Keyboard.release(playerLeftBtn);
 	    }
     }
 }
