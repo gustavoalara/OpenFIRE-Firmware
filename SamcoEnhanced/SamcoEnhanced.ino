@@ -19,6 +19,7 @@
 
  // For custom builders, remember to check (COMPILING.md) for IDE instructions!
  // ISSUERS: REMEMBER TO SPECIFY YOUR USING A CUSTOM BUILD & WHAT CHANGES ARE MADE TO THE SKETCH; OTHERWISE YOUR ISSUE MAY BE CLOSED!
+// GustavoALara custom build. Change d-pad to keys in mouse mode. Added analog stick to keys in mouse mode. Added diferent keys for player 1 and 2 
 
 #include <Arduino.h>
 #include <RP2040.h>
