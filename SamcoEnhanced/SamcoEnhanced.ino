@@ -2307,7 +2307,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerUpBtn);
 			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerLeftBtn;
+			Keyboard.release(playerLeftBtn);
 		}
 		//Diagonal Arriba Izquierda
 	    	if (analogValueY > 2400 && analogValueX < 1700)
@@ -2315,7 +2315,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerUpBtn);
 			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerRightBtn;
+			Keyboard.release(playerRightBtn);
 		}
 		//Diagonal Abajo Derecha
 	    	if (analogValueY < 1700 && analogValueX > 2400)
@@ -2323,7 +2323,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerDownBtn);
 			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn;
+			Keyboard.release(playerLeftBtn);
 		}
 		//Diagonal Abajo Izquierda
 	    	if (analogValueY < 1700 && analogValueX < 1700)
@@ -2331,7 +2331,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerDownBtn);
 			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerRightBtn;
+			Keyboard.release(playerRightBtn);
 		}
 	    	//Arriba
 	    	if (analogValueY > 2400 &&  (analogValueX  < 2400 && analogValueX > 1700))
@@ -2339,7 +2339,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerUpBtn);
 			Keyboard.release(playerRightBtn);
 			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerLeftBtn;
+			Keyboard.release(playerLeftBtn);
 		}
 	    	//Abajo
 	    	if (analogValueY < 1700 &&  (analogValueX  < 2400 && analogValueX > 1700))
@@ -2347,7 +2347,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerDownBtn);
 			Keyboard.release(playerRightBtn);
 			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn;
+			Keyboard.release(playerLeftBtn);
 		}
 	    	//Derecha
 	    	if (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
@@ -2355,7 +2355,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn;
+			Keyboard.release(playerLeftBtn);
 		}
 	    	//Izquierda
 	    	if (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
@@ -2363,7 +2363,7 @@ void AnalogStickPoll()
 			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerRightBtn;
+			Keyboard.release(playerRightBtn);
 		}
 	    }
     } else {
