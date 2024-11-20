@@ -2292,8 +2292,8 @@ void AnalogStickPoll()
     unsigned int analogValueX = analogRead(SamcoPreferences::pins.aStickX);
     unsigned int analogValueY = analogRead(SamcoPreferences::pins.aStickY);
     // Analog stick deadzone should help mitigate overwriting USB commands for the other input channels.
-    if((analogValueX < 1700 || analogValueX > 2000) ||
-       (analogValueY < 1700 || analogValueY > 2000)) {
+    if((analogValueX < 1700 || analogValueX > 2400) ||
+       (analogValueY < 1700 || analogValueY > 2400)) {
 	    if(buttons.analogOutput == true)
 	    {
           	Gamepad16.moveStick(analogValueX, analogValueY);
@@ -2302,7 +2302,7 @@ void AnalogStickPoll()
 	    {
 		 //Convierte la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
 		//Diagonal Arriba Derecha
-	    	If (analogValueY > 2000 && analogValueX > 2000)
+	    	If (analogValueY > 2400 && analogValueX > 2400)
 		{
 			Keyboard.press(playerUpBtn);
 			Keyboard.press(playerRightBtn);
@@ -2310,7 +2310,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerLeftBtn;
 		}
 		//Diagonal Arriba Izquierda
-	    	If (analogValueY > 2000 && analogValueX < 1700)
+	    	If (analogValueY > 2400 && analogValueX < 1700)
 		{
 			Keyboard.press(playerUpBtn);
 			Keyboard.press(playerLeftBtn);
@@ -2318,7 +2318,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerRightBtn;
 		}
 		//Diagonal Abajo Derecha
-	    	If (analogValueY < 1700 && analogValueX > 2000)
+	    	If (analogValueY < 1700 && analogValueX > 2400)
 		{
 			Keyboard.press(playerDownBtn);
 			Keyboard.press(playerRightBtn);
@@ -2334,7 +2334,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerRightBtn;
 		}
 	    	//Arriba
-	    	If (analogValueY > 2000 &&  (analogValueX  < 2000 && analogValueX > 1700))
+	    	If (analogValueY > 2400 &&  (analogValueX  < 2400 && analogValueX > 1700))
 		{
 			Keyboard.press(playerUpBtn);
 			Keyboard.release(playerRightBtn);
@@ -2342,7 +2342,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerLeftBtn;
 		}
 	    	//Abajo
-	    	If (analogValueY < 1700 &&  (analogValueX  < 2000 && analogValueX > 1700))
+	    	If (analogValueY < 1700 &&  (analogValueX  < 2400 && analogValueX > 1700))
 		{
 			Keyboard.press(playerDownBtn);
 			Keyboard.release(playerRightBtn);
@@ -2350,7 +2350,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerLeftBtn;
 		}
 	    	//Derecha
-	    	If (analogValueX > 2000 &&  (analogValueY  < 2000 && analogValueY > 1700))
+	    	If (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
 		{
 			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerDownBtn);
@@ -2358,7 +2358,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerLeftBtn;
 		}
 	    	//Izquierda
-	    	If (analogValueX < 1700 &&  (analogValueY  < 2000 && analogValueY > 1700))
+	    	If (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
 		{
 			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerDownBtn);
