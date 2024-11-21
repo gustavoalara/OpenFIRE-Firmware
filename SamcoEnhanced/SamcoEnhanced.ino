@@ -2301,37 +2301,37 @@ void AnalogStickPoll()
 	    else
 	    {
 		 //Convierte la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
-		//Diagonal Arriba Derecha
+		//Diagonal Arriba Izquierda
 	    	if (analogValueY > 2400 && analogValueX > 2400)
 		{
 			Keyboard.press(playerUpBtn);
-			Keyboard.press(playerRightBtn);
+			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerLeftBtn);
+			Keyboard.release(playerRightBtn);
 		}
-		//Diagonal Arriba Izquierda
+		//Diagonal Arriba Derecha
 	    	if (analogValueY > 2400 && analogValueX < 1700)
 		{
 			Keyboard.press(playerUpBtn);
-			Keyboard.press(playerLeftBtn);
+			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerDownBtn);
+			Keyboard.release(playerLeftBtn);
+		}
+		//Diagonal Abajo Izquierda
+	    	if (analogValueY < 1700 && analogValueX > 2400)
+		{
+			Keyboard.press(playerDownBtn);
+			Keyboard.press(playerLeftBtn);
+			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerRightBtn);
 		}
 		//Diagonal Abajo Derecha
-	    	if (analogValueY < 1700 && analogValueX > 2400)
+	    	if (analogValueY < 1700 && analogValueX < 1700)
 		{
 			Keyboard.press(playerDownBtn);
 			Keyboard.press(playerRightBtn);
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerLeftBtn);
-		}
-		//Diagonal Abajo Izquierda
-	    	if (analogValueY < 1700 && analogValueX < 1700)
-		{
-			Keyboard.press(playerDownBtn);
-			Keyboard.press(playerLeftBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerRightBtn);
 		}
 	    	//Arriba
 	    	if (analogValueY > 2400 &&  (analogValueX  < 2400 && analogValueX > 1700))
@@ -2349,21 +2349,21 @@ void AnalogStickPoll()
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerLeftBtn);
 		}
-	    	//Derecha
-	    	if (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
-		{
-			Keyboard.press(playerRightBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn);
-		}
 	    	//Izquierda
-	    	if (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
+	    	if (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
 		{
 			Keyboard.press(playerLeftBtn);
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerRightBtn);
+		}
+	    	//Derecha
+	    	if (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
+		{
+			Keyboard.press(playerRightBtn);
+			Keyboard.release(playerDownBtn);
+			Keyboard.release(playerUpBtn);
+			Keyboard.release(playerLeftBtn);
 		}
 	    }
     } else {
