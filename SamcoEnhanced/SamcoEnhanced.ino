@@ -2400,11 +2400,14 @@ void AnalogStickPoll()
 	    }
 	    else
 	    {
-                // Release all DPAD keys if analog stick is centered
-		Keyboard.release(playerUpBtn);
-	        Keyboard.release(playerDownBtn);
-	    	Keyboard.release(playerRightBtn);
-	        Keyboard.release(playerLeftBtn);
+		if(buttons.pressed != BtnMask_Up || buttons.pressed != BtnMask_Down || buttons.pressed != BtnMask_Left || buttons.pressed != BtnMask_Right)
+		{
+	                // Release all DPAD keys if analog stick is centered
+			Keyboard.release(playerUpBtn);
+		        Keyboard.release(playerDownBtn);
+		    	Keyboard.release(playerRightBtn);
+		        Keyboard.release(playerLeftBtn);
+		}
 	    }
     }
 }
