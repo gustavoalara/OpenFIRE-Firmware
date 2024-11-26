@@ -1689,18 +1689,18 @@ void ExecGunModeDocked()
                     unsigned int analogValueY = analogRead(SamcoPreferences::pins.aStickY);
                     // Analog stick deadzone should help mitigate overwriting USB commands for the other input channels.
                     uint8_t aStickDir = 0;
-                    if((analogValueX < 1900 || analogValueX > 2200) ||
-                      (analogValueY < 1900 || analogValueY > 2200)) {
-                        if(analogValueX > 2200) {
+                    if((analogValueX < 1700 || analogValueX > 2400) ||
+                      (analogValueY < 1700 || analogValueY > 2400)) {
+                        if(analogValueX > 2400) {
                             bitSet(aStickDir, 0), bitClear(aStickDir, 1);
-                        } else if(analogValueX < 1900) {
+                        } else if(analogValueX < 1700) {
                             bitSet(aStickDir, 1), bitClear(aStickDir, 0);
                         } else {
                             bitClear(aStickDir, 0), bitClear(aStickDir, 1);
                         }
-                        if(analogValueY > 2200) { 
+                        if(analogValueY > 2400) { 
                             bitSet(aStickDir, 2), bitClear(aStickDir, 3);
-                        } else if(analogValueY < 1900) {
+                        } else if(analogValueY < 1700) {
                             bitSet(aStickDir, 3), bitClear(aStickDir, 2);
                         } else {
                             bitClear(aStickDir, 2), bitClear(aStickDir, 3);
@@ -2326,8 +2326,8 @@ void AnalogStickPoll()
 	    }
 	    else
 	    {
-		 //Convierte la información del analogvalueX e Y a cursor arriba, abajo, izquierda o derecha según se pase unos umbrales
-		//Diagonal Arriba Izquierda
+		//Converts the analogvalueX and Y information to cursor up, down, left or right depending on whether thresholds are passed
+		//Diagonal Up Left
 	    	if (analogValueY > 2400 && analogValueX > 2400)
 		{
 			Keyboard.press(playerUpBtn);
@@ -2335,7 +2335,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerRightBtn);
 		}
-		//Diagonal Arriba Derecha
+		//Diagonal Up Right
 	    	if (analogValueY > 2400 && analogValueX < 1700)
 		{
 			Keyboard.press(playerUpBtn);
@@ -2343,7 +2343,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerLeftBtn);
 		}
-		//Diagonal Abajo Izquierda
+		//Diagonal Down Left
 	    	if (analogValueY < 1700 && analogValueX > 2400)
 		{
 			Keyboard.press(playerDownBtn);
@@ -2351,7 +2351,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerRightBtn);
 		}
-		//Diagonal Abajo Derecha
+		//Diagonal Down Right
 	    	if (analogValueY < 1700 && analogValueX < 1700)
 		{
 			Keyboard.press(playerDownBtn);
@@ -2359,7 +2359,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerLeftBtn);
 		}
-	    	//Arriba
+	    	//Up
 	    	if (analogValueY > 2400 &&  (analogValueX  < 2400 && analogValueX > 1700))
 		{
 			Keyboard.press(playerUpBtn);
@@ -2367,7 +2367,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerDownBtn);
 			Keyboard.release(playerLeftBtn);
 		}
-	    	//Abajo
+	    	//Down
 	    	if (analogValueY < 1700 &&  (analogValueX  < 2400 && analogValueX > 1700))
 		{
 			Keyboard.press(playerDownBtn);
@@ -2375,7 +2375,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerLeftBtn);
 		}
-	    	//Izquierda
+	    	//Left
 	    	if (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
 		{
 			Keyboard.press(playerLeftBtn);
@@ -2383,7 +2383,7 @@ void AnalogStickPoll()
 			Keyboard.release(playerUpBtn);
 			Keyboard.release(playerRightBtn);
 		}
-	    	//Derecha
+	    	//Right
 	    	if (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
 		{
 			Keyboard.press(playerRightBtn);
@@ -2400,7 +2400,7 @@ void AnalogStickPoll()
 	    }
 	    else
 	    {
-                // Libera todas las teclas pulsadas en caso de que el stick esté en el centro
+                // Release all DPAD keys if analog stick is centered
 		Keyboard.release(playerUpBtn);
 	        Keyboard.release(playerDownBtn);
 	    	Keyboard.release(playerRightBtn);
