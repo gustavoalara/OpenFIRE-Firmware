@@ -2317,98 +2317,84 @@ void AnalogStickPoll()
 {
     unsigned int analogValueX = analogRead(SamcoPreferences::pins.aStickX);
     unsigned int analogValueY = analogRead(SamcoPreferences::pins.aStickY);
+	
     // Analog stick deadzone should help mitigate overwriting USB commands for the other input channels.
     if((analogValueX < 1700 || analogValueX > 2400) ||
        (analogValueY < 1700 || analogValueY > 2400)) {
-	    if(buttons.analogOutput == true)
-	    {
-          	Gamepad16.moveStick(analogValueX, analogValueY);
-	    }
-	    else
-	    {
-		//Converts the analogvalueX and Y information to cursor up, down, left or right depending on whether thresholds are passed
-		//Diagonal Up Left
-	    	if (analogValueY > 2400 && analogValueX > 2400)
-		{
-			Keyboard.press(playerUpBtn);
-			Keyboard.press(playerLeftBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerRightBtn);
+		if(buttons.analogOutput == true) {
+			Gamepad16.moveStick(analogValueX, analogValueY);
+		} else {
+			// Analog stick to DPAD in RAW mode
+			// Top-Left
+			if(analogValueY > 2400 && analogValueX > 2400) {
+				Keyboard.press(playerUpBtn);
+				Keyboard.press(playerLeftBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerRightBtn);
+			}
+			// Top-Right
+			else if(analogValueY > 2400 && analogValueX < 1700) {
+				Keyboard.press(playerUpBtn);
+				Keyboard.press(playerRightBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerLeftBtn);
+			}
+			// Down-Left
+			else if(analogValueY < 1700 && analogValueX > 2400) {
+				Keyboard.press(playerDownBtn);
+				Keyboard.press(playerLeftBtn);
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerRightBtn);
+			}
+			// Down-Right
+			else if(analogValueY < 1700 && analogValueX < 1700) {
+				Keyboard.press(playerDownBtn);
+				Keyboard.press(playerRightBtn);
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerLeftBtn);
+			}
+			// Up
+			else if(analogValueY > 2400 && (analogValueX < 2400 && analogValueX > 1700)) {
+				Keyboard.press(playerUpBtn);
+				Keyboard.release(playerRightBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerLeftBtn);
+			}
+			// Down
+			else if(analogValueY < 1700 && (analogValueX < 2400 && analogValueX > 1700)) {
+				Keyboard.press(playerDownBtn);
+				Keyboard.release(playerRightBtn);
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerLeftBtn);
+			}
+			// Left
+			else if(analogValueX > 2400 && (analogValueY < 2400 && analogValueY > 1700)) {
+				Keyboard.press(playerLeftBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerRightBtn);
+			}
+			// Right
+			else if(analogValueX < 1700 && (analogValueY < 2400 && analogValueY > 1700)) {
+				Keyboard.press(playerRightBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerLeftBtn);
+			}
 		}
-		//Diagonal Up Right
-	    	if (analogValueY > 2400 && analogValueX < 1700)
-		{
-			Keyboard.press(playerUpBtn);
-			Keyboard.press(playerRightBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerLeftBtn);
-		}
-		//Diagonal Down Left
-	    	if (analogValueY < 1700 && analogValueX > 2400)
-		{
-			Keyboard.press(playerDownBtn);
-			Keyboard.press(playerLeftBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerRightBtn);
-		}
-		//Diagonal Down Right
-	    	if (analogValueY < 1700 && analogValueX < 1700)
-		{
-			Keyboard.press(playerDownBtn);
-			Keyboard.press(playerRightBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn);
-		}
-	    	//Up
-	    	if (analogValueY > 2400 &&  (analogValueX  < 2400 && analogValueX > 1700))
-		{
-			Keyboard.press(playerUpBtn);
-			Keyboard.release(playerRightBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerLeftBtn);
-		}
-	    	//Down
-	    	if (analogValueY < 1700 &&  (analogValueX  < 2400 && analogValueX > 1700))
-		{
-			Keyboard.press(playerDownBtn);
-			Keyboard.release(playerRightBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn);
-		}
-	    	//Left
-	    	if (analogValueX > 2400 &&  (analogValueY  < 2400 && analogValueY > 1700))
-		{
-			Keyboard.press(playerLeftBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerRightBtn);
-		}
-	    	//Right
-	    	if (analogValueX < 1700 &&  (analogValueY  < 2400 && analogValueY > 1700))
-		{
-			Keyboard.press(playerRightBtn);
-			Keyboard.release(playerDownBtn);
-			Keyboard.release(playerUpBtn);
-			Keyboard.release(playerLeftBtn);
-		}
-	    }
     } else {
-	if(buttons.analogOutput == true)
-	    {
+		if(buttons.analogOutput == true) {
         	// Duplicate coords won't be reported, so no worries.
         	Gamepad16.moveStick(2048, 2048);
-	    }
-	    else
-	    {
-		if(buttons.pressed != BtnMask_Up || buttons.pressed != BtnMask_Down || buttons.pressed != BtnMask_Left || buttons.pressed != BtnMask_Right)
-		{
-	                // Release all DPAD keys if analog stick is centered
-			Keyboard.release(playerUpBtn);
-		        Keyboard.release(playerDownBtn);
-		    	Keyboard.release(playerRightBtn);
-		        Keyboard.release(playerLeftBtn);
+		} else {
+			// Release all DPAD keys if analog stick is centered
+			if(!digitalRead(SamcoPreferences::pins.bGunUp) == 0 && !digitalRead(SamcoPreferences::pins.bGunDown) == 0 && !digitalRead(SamcoPreferences::pins.bGunLeft) == 0 && !digitalRead(SamcoPreferences::pins.bGunRight) == 0) {
+				Keyboard.release(playerUpBtn);
+				Keyboard.release(playerDownBtn);
+				Keyboard.release(playerRightBtn);
+				Keyboard.release(playerLeftBtn);
+			}
 		}
-	    }
     }
 }
 #endif // USES_ANALOG
