@@ -139,17 +139,17 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 // Sanity checks and assignments for player number -> common keyboard assignments
 #if PLAYER_NUMBER == 1
-    char playerStartBtn = "1"; // 0xB0 Enter para distribución Pocho
-    char playerSelectBtn = "5"; // 0x85 Right Shift para distribución Pocho
+    char playerStartBtn = '1'; // 0xB0 Enter para distribucion Pocho
+    char playerSelectBtn = '5'; // 0x85 Right Shift para distribucion Pocho
     char playerUpBtn = 0xDA; // Arriba
     char playerDownBtn = 0xD9; // Abajo
     char playerLeftBtn = 0xD8; // Izquierda
     char playerRightBtn = 0xD7;  // Derecha
     char playerCBtn = 0x81; // Left Shift
-    char playerPumpBtn = 0x85; // Right Shift.  0x86 Right Alt para distribución Pocho
+    char playerPumpBtn = 0x85; // Right Shift.  0x86 Right Alt para distribucion Pocho
 #elif PLAYER_NUMBER == 2
-    char playerStartBtn = '2'; // R para distribución Pocho
-    char playerSelectBtn = '6'; // C para distribución Pocho
+    char playerStartBtn = '2'; // R para distribucion Pocho
+    char playerSelectBtn = '6'; // C para distribucion Pocho
     char playerUpBtn = 'w';
     char playerDownBtn = 's';
     char playerLeftBtn = 'a';
