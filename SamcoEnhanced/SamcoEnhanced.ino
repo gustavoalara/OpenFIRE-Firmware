@@ -139,17 +139,17 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 // Sanity checks and assignments for player number -> common keyboard assignments
 #if PLAYER_NUMBER == 1
-    char playerStartBtn = '1';
-    char playerSelectBtn = '5';
+    char playerStartBtn = 0xB0;
+    char playerSelectBtn = 0x85;
     char playerUpBtn = 0xDA;
     char playerDownBtn = 0xD9;
     char playerLeftBtn = 0xD8;
     char playerRightBtn = 0xD7;
     char playerCBtn = 0x81; // Left Shift
-    char playerPumpBtn = 0x85; // Right Shift
+    char playerPumpBtn = 0x86; // Right Alt
 #elif PLAYER_NUMBER == 2
-    char playerStartBtn = '2';
-    char playerSelectBtn = '6';
+    char playerStartBtn = 'R';
+    char playerSelectBtn = 'C';
     char playerUpBtn = 'w';
     char playerDownBtn = 's';
     char playerLeftBtn = 'a';
